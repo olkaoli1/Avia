@@ -1,6 +1,7 @@
 package ru.netology.tasks;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AviaSoulsTest {
@@ -13,8 +14,9 @@ public class AviaSoulsTest {
         aviaSouls.add(ticket1);
 
         Ticket[] result = aviaSouls.findAll();
-        assertEquals(1, result.length);
-        assertEquals(ticket1, result[0]);
+        Ticket[] expected = {ticket1};
+
+        assertArrayEquals(expected, result);
     }
 
     @Test
@@ -30,10 +32,8 @@ public class AviaSoulsTest {
         aviaSouls.add(ticket3);
 
         Ticket[] result = aviaSouls.search("Москва", "Сочи");
+        Ticket[] expected = {ticket2, ticket1, ticket3}; // Билеты сортируются по цене
 
-        assertEquals(3, result.length);
-        assertEquals(ticket2, result[0]); // Самый дешевый билет
-        assertEquals(ticket1, result[1]);
-        assertEquals(ticket3, result[2]); // Самый дорогой билет
+        assertArrayEquals(expected, result);
     }
 }
