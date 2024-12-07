@@ -1,35 +1,29 @@
 package ru.netology.tasks;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class AviaSouls {
-    private Ticket[] tickets = new Ticket[0];
-
-    private Ticket[] addToArray(Ticket[] current, Ticket ticket) {
-        Ticket[] tmp = new Ticket[current.length + 1];
-        for (int i = 0; i < current.length; i++) {
-            tmp[i] = current[i];
-        }
-        tmp[tmp.length - 1] = ticket;
-        return tmp;
-    }
+    private List<Ticket> tickets = new ArrayList<>();
 
     public void add(Ticket ticket) {
-        tickets = addToArray(tickets, ticket);
+        tickets.add(ticket);
     }
 
     public Ticket[] findAll() {
-        return tickets;
+        return tickets.toArray(new Ticket[0]);
     }
 
     public Ticket[] search(String from, String to) {
-        Ticket[] result = new Ticket[0];
+        List<Ticket> result = new ArrayList<>();
         for (Ticket ticket : tickets) {
             if (ticket.getFrom().equals(from) && ticket.getTo().equals(to)) {
-                result = addToArray(result, ticket);
+                result.add(ticket);
             }
         }
-        Arrays.sort(result);
-        return result;
+        Ticket[] resultArray = result.toArray(new Ticket[0]);
+        Arrays.sort(resultArray);
+        return resultArray;
     }
 }
